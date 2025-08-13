@@ -39,6 +39,7 @@ const WhatsAppFloat = () => {
       {isVisible && (
         <motion.div
           className="fixed bottom-6 right-6 z-50"
+          style={{ marginRight: '8px' }}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
@@ -111,12 +112,13 @@ const WhatsAppFloat = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             animate={{
-              y: [0, -8, 0],
+              y: [0, -5, 0],
             }}
             transition={{
-              duration: 2,
+              duration: 3,
               repeat: Infinity,
               ease: 'easeInOut',
+              repeatDelay: 2,
             }}
           >
             {/* Pulse Animation */}
@@ -127,9 +129,10 @@ const WhatsAppFloat = () => {
                 opacity: [0.7, 0, 0.7],
               }}
               transition={{
-                duration: 2,
+                duration: 3,
                 repeat: Infinity,
                 ease: 'easeInOut',
+                repeatDelay: 2,
               }}
             />
             
@@ -153,19 +156,22 @@ const WhatsAppFloat = () => {
             </motion.div>
           </motion.a>
 
-          {/* Support Text */}
-          <motion.div
-            className="absolute bottom-20 right-0 mr-2"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.3 }}
-          >
-            <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-gray-200">
-              <span className="text-sm font-medium text-gray-800 whitespace-nowrap">
-                Chat with us!
-              </span>
-            </div>
-          </motion.div>
+          {/* Support Text - Only show when not showing tooltip */}
+          {!showTooltip && (
+            <motion.div
+              className="absolute bottom-20 right-0 mr-2"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ delay: 0.5, duration: 0.3 }}
+            >
+              <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-gray-200">
+                <span className="text-sm font-medium text-gray-800 whitespace-nowrap">
+                  Chat with us!
+                </span>
+              </div>
+            </motion.div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
